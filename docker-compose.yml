@@ -4,6 +4,8 @@ x-environment: &default-environment
   PORT: 8000  # If changing, change the web service port too
   EMAIL_URL: ${EMAIL_URL:-consolemail://}  # Example smtp://email:password@smtp_url:port
   GLITCHTIP_DOMAIN: ${GLITCHTIP_DOMAIN:-http://localhost}  # Change this to your domain
+  CSRF_TRUSTED_ORIGINS: ${GLITCHTIP_DOMAIN:-http://localhost}
+  CORS_ALLOWED_ORIGINS: ${GLITCHTIP_DOMAIN:-http://localhost}
   DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-email@example.com}  # Change this to your email
   REDIS_URL: redis://${REDIS_PASSWORD:+:${REDIS_PASSWORD}@}glitchtip-valkey:6379/0
   CELERY_BROKER_URL: ${CELERY_BROKER_URL:-redis://${REDIS_PASSWORD:+:${REDIS_PASSWORD}@}glitchtip-valkey:6379/0}
