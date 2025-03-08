@@ -1,25 +1,25 @@
 x-environment: &default-environment
-  DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@glitchtip-postgres:5432/postgres
-  SECRET_KEY: ${SECRET_KEY:-change_me_to_something_random}  # best to run openssl rand -hex 32
-  PORT: 8000  # If changing, change the web service port too
-  EMAIL_URL: ${EMAIL_URL:-consolemail://}  # Example smtp://email:password@smtp_url:port
-  GLITCHTIP_DOMAIN: ${GLITCHTIP_DOMAIN:-http://localhost}  # Change this to your domain
-  CSRF_TRUSTED_ORIGINS: ${GLITCHTIP_DOMAIN:-http://localhost}
-  CORS_ALLOWED_ORIGINS: ${GLITCHTIP_DOMAIN:-http://localhost}
-  DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-email@example.com}  # Change this to your email
-  REDIS_URL: redis://${REDIS_PASSWORD:+:${REDIS_PASSWORD}@}glitchtip-valkey:6379/0
-  CELERY_BROKER_URL: ${CELERY_BROKER_URL:-redis://${REDIS_PASSWORD:+:${REDIS_PASSWORD}@}glitchtip-valkey:6379/0}
   CACHE_URL: ${CACHE_URL:-redis://${REDIS_PASSWORD:+:${REDIS_PASSWORD}@}glitchtip-valkey:6379/0}
-  CELERY_WORKER_AUTOSCALE: 1,3
-  GLITCHTIP_MAX_EVENT_LIFE_DAYS: ${GLITCHTIP_MAX_EVENT_LIFE_DAYS:-14}
-  GLITCHTIP_MAX_TRANSACTION_EVENT_LIFE_DAYS: ${GLITCHTIP_MAX_TRANSACTION_EVENT_LIFE_DAYS:-${GLITCHTIP_MAX_EVENT_LIFE_DAYS:-14}}
-  GLITCHTIP_MAX_FILE_LIFE_DAYS: ${GLITCHTIP_MAX_FILE_LIFE_DAYS:-$${GLITCHTIP_MAX_EVENT_LIFE_DAYS:-14}}
-  ENABLE_USER_REGISTRATION: ${ENABLE_USER_REGISTRATION:-False}
-  ENABLE_ORGANIZATION_CREATION: ${ENABLE_ORGANIZATION_CREATION:-False}
-  UWSGI_WORKERS: ${UWSGI_WORKERS:-2}
-  UWSGI_CHEAPER: ${UWSGI_CHEAPER:-1}
-  UWSGI_CHEAPER_INITIAL: ${UWSGI_CHEAPER_INITIAL:-1}
+  CELERY_BROKER_URL: ${CELERY_BROKER_URL:-redis://${REDIS_PASSWORD:+:${REDIS_PASSWORD}@}glitchtip-valkey:6379/0}
+  CELERY_WORKER_AUTOSCALE: 1,5
   CELERY_WORKER_CONCURRENCY: ${CELERY_WORKER_CONCURRENCY:-2}
+  CORS_ALLOWED_ORIGINS: ${GLITCHTIP_DOMAIN:-http://localhost}
+  CSRF_TRUSTED_ORIGINS: ${GLITCHTIP_DOMAIN:-http://localhost}
+  DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@glitchtip-postgres:5432/postgres
+  DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-email@example.com}  # Change this to your email
+  EMAIL_URL: ${EMAIL_URL:-consolemail://}  # Example smtp://email:password@smtp_url:port
+  ENABLE_ORGANIZATION_CREATION: ${ENABLE_ORGANIZATION_CREATION:-False}
+  ENABLE_USER_REGISTRATION: ${ENABLE_USER_REGISTRATION:-False}
+  GLITCHTIP_DOMAIN: ${GLITCHTIP_DOMAIN:-http://localhost}  # Change this to your domain
+  GLITCHTIP_MAX_EVENT_LIFE_DAYS: ${GLITCHTIP_MAX_EVENT_LIFE_DAYS:-14}
+  GLITCHTIP_MAX_FILE_LIFE_DAYS: ${GLITCHTIP_MAX_FILE_LIFE_DAYS:-$${GLITCHTIP_MAX_EVENT_LIFE_DAYS:-14}}
+  GLITCHTIP_MAX_TRANSACTION_EVENT_LIFE_DAYS: ${GLITCHTIP_MAX_TRANSACTION_EVENT_LIFE_DAYS:-${GLITCHTIP_MAX_EVENT_LIFE_DAYS:-14}}
+  PORT: 8000  # If changing, change the web service port too
+  REDIS_URL: redis://${REDIS_PASSWORD:+:${REDIS_PASSWORD}@}glitchtip-valkey:6379/0
+  SECRET_KEY: ${SECRET_KEY:-change_me_to_something_random}  # best to run openssl rand -hex 32
+  UWSGI_CHEAPER: ${UWSGI_CHEAPER:-2}
+  UWSGI_CHEAPER_INITIAL: ${UWSGI_CHEAPER_INITIAL:-2}
+  UWSGI_WORKERS: ${UWSGI_WORKERS:-4}
 
 x-depends_on: &default-depends_on
   - glitchtip-postgres
